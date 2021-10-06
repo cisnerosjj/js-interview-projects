@@ -12,8 +12,8 @@ const DisplayInfo = ({ data, repositories }) => {
           <tr>
             <td>{data.name}</td>
             <td>
-              {repositories?.data.map((repo) => {
-                return <a>{repo.name}</a>;
+              {repositories?.data?.map((repo) => {
+                return <a href={repo.html_url}>{repo.name}</a>;
               })}
             </td>
           </tr>
