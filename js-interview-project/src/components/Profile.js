@@ -1,5 +1,6 @@
 import react, { useState } from "react";
 import axios from "axios";
+import DisplayInfo from "./DisplayInfo";
 
 const Profile = () => {
   const [data, setData] = useState({});
@@ -26,7 +27,7 @@ const Profile = () => {
         setRepositories(repositories)
     }
 
-    console.log(repositories);
+    console.log(repositories.data[2].name);
   };
 
   return (
@@ -35,9 +36,7 @@ const Profile = () => {
       <button onClick={submitHandler} type="submit">
         Search
       </button>
-      <ul>
-        <li>{data.location}</li>
-      </ul>
+      <DisplayInfo data={data} repositories={repositories}></DisplayInfo>
     </div>
   );
 };
