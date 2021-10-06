@@ -1,7 +1,4 @@
 const DisplayInfo = ({ data, repositories }) => {
-
-const repos = repositories.data
-
   return (
     <div>
       <table>
@@ -15,9 +12,9 @@ const repos = repositories.data
           <tr>
             <td>{data.name}</td>
             <td>
-              {repos.map((repo) => {
-                <div key={repo.name}>{repo.name}</div>
-              }) }
+              {repositories?.data.map((repo) => {
+                return <a>{repo.name}</a>;
+              })}
             </td>
           </tr>
         </tbody>

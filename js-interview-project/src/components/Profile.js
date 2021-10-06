@@ -21,13 +21,17 @@ const Profile = () => {
       .then((response) => response.data);
 
     const repositories = await axios(profile.repos_url);
+    
+    const repoJson = repositories
+
+    console.log(repoJson)
 
     if(profile) {
         setData(profile)
         setRepositories(repositories)
     }
 
-    console.log(repositories.data[2].name);
+    console.log(repositories.data);
   };
 
   return (
