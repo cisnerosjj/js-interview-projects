@@ -41,18 +41,27 @@ const Profile = () => {
   return (
     <div>
       {loading ? (
-        "Loading Content..."
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
       ) : (
         <>
-          <input
-            type="text"
-            value={username}
-            onChange={onChangeHandler}
-          ></input>
+          <div class="ui search">
+            <div class="ui icon input">
+              <i class="search icon"></i>
+              <input
+                type="text"
+                value={username}
+                onChange={onChangeHandler}
+              ></input>
+            </div>
+          </div>
           <button onClick={submitHandler} type="submit">
             Search
           </button>
-          <DisplayInfo data={data} repositories={repositories}></DisplayInfo>)
+          <DisplayInfo data={data} repositories={repositories}></DisplayInfo>
         </>
       )}
     </div>
