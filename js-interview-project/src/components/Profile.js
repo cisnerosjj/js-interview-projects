@@ -24,6 +24,8 @@ const Profile = () => {
     
     const repoJson = repositories
 
+    console.log(profile,"**********")
+
     console.log(repoJson)
 
     if(profile) {

@@ -1,10 +1,11 @@
 const DisplayInfo = ({ data, repositories }) => {
   return (
     <div>
-      <table>
+      <table className="table table-striped">
         <thead>
           <tr>
             <th>Name</th>
+            <th>Organizations</th>
             <th>Repositories</th>
           </tr>
         </thead>
@@ -12,8 +13,20 @@ const DisplayInfo = ({ data, repositories }) => {
           <tr>
             <td>{data.name}</td>
             <td>
+              <a>{data.organizations_url}</a>
+            </td>
+            <td>
               {repositories?.data?.map((repo) => {
-                return <a href={repo.html_url}>{repo.name}</a>;
+                return (
+                  <li key={repo.name} className="position-relative">
+                    <a
+                      href={repo.html_url}
+                      className=""
+                    >
+                      {repo.name}
+                    </a>
+                  </li>
+                );
               })}
             </td>
           </tr>
