@@ -4,7 +4,7 @@ const DisplayInfo = ({ data, repositories }) => {
       <table className="table table-striped">
         <thead>
           <tr>
-            <th>Name</th>
+            <th>User name</th>
             <th>Organizations</th>
             <th>Repositories</th>
           </tr>
