@@ -1,6 +1,4 @@
 import "./App.css";
-import { useState } from "react";
-import axios from "axios";
 import Profile from "./components/Profile";
 import logo from "./github-image.png";
 
