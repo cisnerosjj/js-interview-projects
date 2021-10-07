@@ -6,6 +6,7 @@ const Profile = () => {
   const [data, setData] = useState({});
   const [username, setUsername] = useState("");
   const [repositories, setRepositories] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const onChangeHandler = (e) => {
     setUsername(e.target.value);
@@ -15,22 +16,23 @@ const Profile = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     const profile = await axios
       .get(`${BASE_URL}/users/${username}`)
       .then((response) => response.data);
 
     const repositories = await axios(profile.repos_url);
-    
-    const repoJson = repositories
 
-    console.log(profile,"**********")
+    const repoJson = repositories;
 
-    console.log(repoJson)
+    console.log(profile, "**********");
 
-    if(profile) {
-        setData(profile)
-        setRepositories(repositories)
+    console.log(repoJson);
+
+    if (profile) {
+      setData(profile);
+      setRepositories(repositories);
+      setLoading(false);
     }
 
     console.log(repositories.data);
@@ -38,11 +40,21 @@ const Profile = () => {
 
   return (
     <div>
-      <input type="text" value={username} onChange={onChangeHandler}></input>
-      <button onClick={submitHandler} type="submit">
-        Search
-      </button>
-      <DisplayInfo data={data} repositories={repositories}></DisplayInfo>
+      {loading ? (
+        "Loading Content..."
+      ) : (
+        <>
+          <input
+            type="text"
+            value={username}
+            onChange={onChangeHandler}
+          ></input>
+          <button onClick={submitHandler} type="submit">
+            Search
+          </button>
+          <DisplayInfo data={data} repositories={repositories}></DisplayInfo>)
+        </>
+      )}
     </div>
   );
 };
