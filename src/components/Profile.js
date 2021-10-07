@@ -25,17 +25,11 @@ const Profile = () => {
 
     const repoJson = repositories;
 
-    console.log(profile, "**********");
-
-    console.log(repoJson);
-
     if (profile) {
       setData(profile);
       setRepositories(repositories);
       setLoading(false);
     }
-
-    console.log(repositories.data);
   };
 
   return (
