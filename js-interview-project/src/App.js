@@ -2,11 +2,12 @@ import "./App.css";
 import { useState } from "react";
 import axios from "axios";
 import Profile from "./components/Profile";
+import logo from "./github-image.png";
 
 function App() {
   return (
     <div className="App">
-      <div className="navbar ">GitHub Search</div>
+      <img src={logo} height="50x" />
       <Profile></Profile>
     </div>
   );
