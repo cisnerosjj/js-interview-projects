@@ -1,12 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../components/home.css";
 
 const Home = () => {
   return (
     <>
-      <h1>Home</h1>
+      <div class="typewriter">
+        <h1>Find Github Users!</h1>
+      </div>
       <Link to="/profile">
-        <button>Start to search users!</button>
+        <button type="button" className="btn btn-primary btn-lg" >
+          Start!
+        </button>
       </Link>
     </>
   );

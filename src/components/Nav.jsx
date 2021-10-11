@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/github-image.png";
+import "../components/nav.css"
 
 const Nav = () => {
   return (
-    <nav>
-      <Link to="/">
-        <img src={logo} alt="Github Logo" height="50x" />
-      </Link>
-      
-    </nav>
+    <div >
+      <nav >
+        <Link to="/">
+          <img className="logo" src={logo} alt="Github Logo" height="100x" />
+        </Link>
+      </nav>
+    </div>
   );
 };
 export default Nav;
