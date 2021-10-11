@@ -1,6 +1,8 @@
-import react, { useState } from "react";
 import axios from "axios";
+import { useState } from "react";
 import DisplayInfo from "./DisplayInfo";
+
+const BASE_URL = "https://api.github.com";
 
 const Profile = () => {
   const [data, setData] = useState({});
@@ -8,53 +10,69 @@ const Profile = () => {
   const [repositories, setRepositories] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  // export { getRepos, getUserData };
+
   const onChangeHandler = (e) => {
     setUsername(e.target.value);
   };
 
-  const BASE_URL = "https://api.github.com";
-
   const submitHandler = async (e) => {
+    console.log(username);
     e.preventDefault();
     setLoading(true);
-    const profile = await axios
-      .get(`${BASE_URL}/users/${username}`)
-      .then((response) => response.data);
 
-    const repositories = await axios(profile.repos_url);
+    const url = `${BASE_URL}/users/${username}/repos?per_page=250`;
 
-    const repoJson = repositories;
+    const getRepos = await axios
+      .get(url)
+      .then((response) => response.data)
+      .catch((e) => console.log(e));
 
-    if (profile) {
-      setData(profile);
-      setRepositories(repositories);
-      setLoading(false);
-    }
+    const getUserData = await axios
+      .all([
+        axios.get(`${BASE_URL}/users/${username}`),
+        axios.get(`${BASE_URL}/users/${username}/orgs`),
+      ])
+      .then(([user, orgs]) => ({
+        user: user.data,
+        orgs: orgs.data,
+      }))
+      .catch((e) => console.log(e));
+
+    setRepositories(getRepos);
+    setData(getUserData);
+    setLoading(false);
   };
-
   return (
     <div>
       {loading ? (
-        <div class="d-flex justify-content-center">
-          <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
+        <div className="d-flex justify-content-center">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
           </div>
         </div>
       ) : (
         <>
-          <div class="ui search">
-            <div class="ui icon input">
-              <i class="search icon"></i>
+          <div className="ui search mb-5 mt-5">
+            <div className="ui icon input">
+              <i className="search icon"></i>
               <input
+                className="prompt"
                 type="text"
+                placeholder="Search username here..."
                 value={username}
                 onChange={onChangeHandler}
               ></input>
             </div>
+            <button
+              className="ui primary button ms-3"
+              onClick={submitHandler}
+              type="submit"
+            >
+              <i className="github icon"></i>
+              Search
+            </button>
           </div>
-          <button onClick={submitHandler} type="submit">
-            Search
-          </button>
           <DisplayInfo data={data} repositories={repositories}></DisplayInfo>
         </>
       )}

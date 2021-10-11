@@ -11,23 +11,28 @@ const DisplayInfo = ({ data, repositories }) => {
         </thead>
         <tbody>
           <tr>
-            <td>{data.name}</td>
-            <td>
-              <a>{data.organizations_url}</a>
+            <td>{data?.user?.name}</td>
+            <td><a href={data?.user?.organizations_url}>
+              {data?.user?.organizations_url}
+              </a> 
             </td>
             <td>
-              {repositories?.data?.map((repo) => {
-                return (
-                  <li key={repo.name} className="position-relative">
-                    <a
-                      href={repo.html_url}
-                      className=""
-                    >
-                      {repo.name}
-                    </a>
-                  </li>
-                );
-              })}
+              {repositories?.map((repo) => (
+                <div key={repo.name} className="ui relaxed divided list">
+                  <div className="item" style={{marginLeft: 110}}>
+                    <i className="large github aligned icon"></i>
+
+                    <div className="content">
+                      <a
+                        href={repo.html_url}
+                        className="header"
+                      >
+                        {repo.name}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </td>
           </tr>
         </tbody>
