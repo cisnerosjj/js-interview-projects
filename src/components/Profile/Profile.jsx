@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useState } from "react";
-import DisplayInfo from "./DisplayInfo";
+import { useEffect, useState } from "react";
+import { getUserData } from "../../Services/ApiGithubService";
+import DisplayInfo from "../DisplayInfo/DisplayInfo";
 
 const BASE_URL = "https://api.github.com";
 
@@ -10,37 +11,22 @@ const Profile = () => {
   const [repositories, setRepositories] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // export { getRepos, getUserData };
+  useEffect(() => {
+    getUserData().then(() => setData());
+  }, []);
 
   const onChangeHandler = (e) => {
     setUsername(e.target.value);
   };
 
   const submitHandler = async (e) => {
-    console.log(username);
-    e.preventDefault();
     setLoading(true);
 
-    const url = `${BASE_URL}/users/${username}/repos?per_page=250`;
+    setData();
 
-    const getRepos = await axios
-      .get(url)
-      .then((response) => response.data)
-      .catch((e) => console.log(e));
+    console.log(username);
+    e.preventDefault();
 
-    const getUserData = await axios
-      .all([
-        axios.get(`${BASE_URL}/users/${username}`),
-        axios.get(`${BASE_URL}/users/${username}/orgs`),
-      ])
-      .then(([user, orgs]) => ({
-        user: user.data,
-        orgs: orgs.data,
-      }))
-      .catch((e) => console.log(e));
-
-    setRepositories(getRepos);
-    setData(getUserData);
     setLoading(false);
   };
   return (

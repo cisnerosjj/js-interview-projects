@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/github-image.png";
-import "../components/nav.css"
+import logo from "../../assets/github-image.png"
+import "../Nav/nav.css"
 
 const Nav = () => {
   return (
