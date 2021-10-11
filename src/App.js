@@ -1,14 +1,20 @@
 import "./App.css";
+import "semantic-ui-css/semantic.min.css";
+import Nav from "./components/Nav";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Profile from "./components/Profile";
-import logo from "./github-image.png";
-import 'semantic-ui-css/semantic.min.css';
+import Home from "./components/Home";
+
 
 function App() {
   return (
-    <div className="App">
-      <img src={logo} alt="Github Logo" height="50x"/>
-      <Profile></Profile>
-    </div>
+    <Router>
+      <div className="App">
+        <Nav />
+        <Home></Home>
+        <Route path="/profile" component={Profile}></Route>
+      </div>
+    </Router>
   );
 }
 
