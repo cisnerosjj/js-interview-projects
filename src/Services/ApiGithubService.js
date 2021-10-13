@@ -1,21 +1,22 @@
-import axios, { Axios } from "axios";
-import { apiGitHub, create } from "./BaseService";
+import axios from "axios";
 
-export const getRepos = async (username) => {
-  const { data } = await apiGitHub.get(`/users/${username}/repos?per_page=250`);
-  return data;
-};
+const BASE_URL = "https://api.github.com";
 
-export const getUserData = async (username) => {
+export { getRepos, getUserData };
 
-    const requestOne = apiGitHub.get(`/users/${username}`)
-    const requestTwo = apiGitHub.get(`/users/${username}/orgs`)
+function getRepos(username) {
+  const url = `${BASE_URL}/users/${username}/repos?per_page=250`;
+  return axios.get(url).then(response => response.data);
+}
 
-  const { userData } = axios
-    .all([requestOne, requestTwo])
+function getUserData(username) {
+  return axios
+    .all([
+      axios.get(`${BASE_URL}/users/${username}`),
+      axios.get(`${BASE_URL}/users/${username}/orgs`)
+    ])
     .then(([user, orgs]) => ({
       user: user.data,
-      orgs: orgs.data,
+      orgs: orgs.data
     }));
-  return userData;
-};
+}

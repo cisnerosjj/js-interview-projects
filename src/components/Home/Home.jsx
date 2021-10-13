@@ -5,7 +5,7 @@ import "../Home/home.css";
 const Home = () => {
   return (
     <>
-      <div class="typewriter">
+      <div className="typewriter">
         <h1>Find Github Users!</h1>
       </div>
       <Link to="/profile">

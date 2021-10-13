@@ -1,9 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { getRepos, getUserData } from "../../Services/ApiGithubService";
 import DisplayInfo from "../DisplayInfo/DisplayInfo";
-
-const BASE_URL = "https://api.github.com";
 
 const Profile = () => {
   const [data, setData] = useState({});
@@ -13,14 +10,14 @@ const Profile = () => {
 
   useEffect(() => {
     getRepos(username).then((repos) => {
-      console.log(repos);
+      // console.log(repos);
       setRepositories(repos);
     });
     getUserData(username).then((userData) => {
-      console.log(userData)
-      setData(userData)
-    })
-  }, [username]);
+      // console.log(userData);
+      setData(userData);
+    });
+  }, []);
 
   const onChangeHandler = (e) => {
     setUsername(e.target.value);
@@ -31,9 +28,7 @@ const Profile = () => {
     setLoading(true);
 
     setData();
-    setRepositories()
-
-    console.log(username);
+    setRepositories();
 
     setLoading(false);
   };
