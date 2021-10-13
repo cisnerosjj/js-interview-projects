@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { getUserData } from "../../Services/ApiGithubService";
+import { getRepos, getUserData } from "../../Services/ApiGithubService";
 import DisplayInfo from "../DisplayInfo/DisplayInfo";
 
 const BASE_URL = "https://api.github.com";
@@ -12,20 +12,28 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getUserData().then(() => setData());
-  }, []);
+    getRepos(username).then((repos) => {
+      console.log(repos);
+      setRepositories(repos);
+    });
+    getUserData(username).then((userData) => {
+      console.log(userData)
+      setData(userData)
+    })
+  }, [username]);
 
   const onChangeHandler = (e) => {
     setUsername(e.target.value);
   };
 
   const submitHandler = async (e) => {
+    e.preventDefault();
     setLoading(true);
 
     setData();
+    setRepositories()
 
     console.log(username);
-    e.preventDefault();
 
     setLoading(false);
   };
