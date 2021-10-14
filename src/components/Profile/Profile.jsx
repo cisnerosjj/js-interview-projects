@@ -3,6 +3,7 @@ import DisplayInfo from "../DisplayInfo/DisplayInfo";
 
 const Profile = () => {
   const [username, setUsername] = useState("");
+  const [clicked, setClicked] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const onChangeHandler = (e) => {
@@ -10,12 +11,14 @@ const Profile = () => {
   };
 
   const submitHandler = async (e) => {
+    setLoading(true)
     e.preventDefault();
-    // setLoading(true);
     setUsername(username)
-    console.log(username)
+    setClicked(true)
 
-    // setLoading(false);
+    setTimeout(() => {  //just to check loader
+      setLoading(false)
+    }, 2000);
   };
 
   return (
@@ -48,7 +51,12 @@ const Profile = () => {
               Search
             </button>
           </div>
-          <DisplayInfo username={username} onClick={()=> submitHandler(username)}></DisplayInfo>
+          <DisplayInfo
+            username={username}
+            clicked={clicked}
+            setClicked={setClicked}
+            loading={setLoading}
+          ></DisplayInfo>
         </>
       )}
     </div>

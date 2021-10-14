@@ -2,27 +2,22 @@ import { useEffect, useState } from "react";
 import { getRepos, getUserData } from "../../Services/ApiGithubService";
 
 const DisplayInfo = (props) => {
-  const [data, setData] = useState({});
-  // const [username, setUsername] = useState("");
   const [repositories, setRepositories] = useState([]);
-  // const [loading, setLoading] = useState(false);
-  
-  const username = props.username
-  console.log(username)
+  const [data, setData] = useState({});
 
-  // const test = props.submitHan
-
+  const username = props.username;
 
   useEffect(() => {
-    getRepos(username).then((repos) => {
-      // console.log(repos);
-      setRepositories(repos);
-    });
-    getUserData(username).then((userData) => {
-      console.log(userData);
-      setData(userData);
-    });
-  }, []);
+    if (props.clicked && username) {
+      props.setClicked(false);
+      getRepos(username).then((repos) => {
+        setRepositories(repos);
+      });
+      getUserData(username).then((userData) => {
+        setData(userData);
+      });
+    }
+  }, [username]);
 
   return (
     <div>
