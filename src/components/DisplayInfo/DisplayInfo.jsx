@@ -1,4 +1,29 @@
-const DisplayInfo = ({ data, repositories }) => {
+import { useEffect, useState } from "react";
+import { getRepos, getUserData } from "../../Services/ApiGithubService";
+
+const DisplayInfo = (props) => {
+  const [data, setData] = useState({});
+  // const [username, setUsername] = useState("");
+  const [repositories, setRepositories] = useState([]);
+  // const [loading, setLoading] = useState(false);
+  
+  const username = props.username
+  console.log(username)
+
+  // const test = props.submitHan
+
+
+  useEffect(() => {
+    getRepos(username).then((repos) => {
+      // console.log(repos);
+      setRepositories(repos);
+    });
+    getUserData(username).then((userData) => {
+      console.log(userData);
+      setData(userData);
+    });
+  }, []);
+
   return (
     <div>
       <table className="table table-striped">
@@ -12,21 +37,19 @@ const DisplayInfo = ({ data, repositories }) => {
         <tbody>
           <tr>
             <td>{data?.user?.name}</td>
-            <td><a href={data?.user?.organizations_url}>
-              {data?.user?.organizations_url}
-              </a> 
+            <td>
+              <a href={data?.user?.organizations_url}>
+                {data?.user?.organizations_url}
+              </a>
             </td>
             <td>
               {repositories?.map((repo) => (
                 <div key={repo.name} className="ui relaxed divided list">
-                  <div className="item" style={{marginLeft: 110}}>
+                  <div className="item" style={{ marginLeft: 110 }}>
                     <i className="large github aligned icon"></i>
 
                     <div className="content">
-                      <a
-                        href={repo.html_url}
-                        className="header"
-                      >
+                      <a href={repo.html_url} className="header">
                         {repo.name}
                       </a>
                     </div>

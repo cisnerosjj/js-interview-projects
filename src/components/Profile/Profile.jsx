@@ -1,23 +1,9 @@
-import { useEffect, useState } from "react";
-import { getRepos, getUserData } from "../../Services/ApiGithubService";
+import { useState } from "react";
 import DisplayInfo from "../DisplayInfo/DisplayInfo";
 
 const Profile = () => {
-  const [data, setData] = useState({});
   const [username, setUsername] = useState("");
-  const [repositories, setRepositories] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    getRepos(username).then((repos) => {
-      // console.log(repos);
-      setRepositories(repos);
-    });
-    getUserData(username).then((userData) => {
-      // console.log(userData);
-      setData(userData);
-    });
-  }, []);
 
   const onChangeHandler = (e) => {
     setUsername(e.target.value);
@@ -25,13 +11,13 @@ const Profile = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
+    setUsername(username)
+    console.log(username)
 
-    setData();
-    setRepositories();
-
-    setLoading(false);
+    // setLoading(false);
   };
+
   return (
     <div>
       {loading ? (
@@ -62,7 +48,7 @@ const Profile = () => {
               Search
             </button>
           </div>
-          <DisplayInfo data={data} repositories={repositories}></DisplayInfo>
+          <DisplayInfo username={username} onClick={()=> submitHandler(username)}></DisplayInfo>
         </>
       )}
     </div>
