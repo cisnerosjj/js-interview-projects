@@ -1,23 +1,22 @@
-import { useEffect, useState } from "react";
-import { getRepos, getUserData } from "../../Services/ApiGithubService";
+import { useContext, useEffect } from "react";
+import { DataContext } from "../../Context/dataContext";
+import { DataRepoContext } from "../../Context/repoContext";
 
-const DisplayInfo = (props) => {
-  const [repositories, setRepositories] = useState([]);
-  const [data, setData] = useState({});
-
-  const username = props.username;
+const DisplayInfo = ({ username, clicked, setClicked }) => {
+  const { data } = useContext(DataContext);
+  const { repositories } = useContext(DataRepoContext);
+  const { getUserInfo } = useContext(DataContext);
+  const { getRepoData } = useContext(DataRepoContext);
 
   useEffect(() => {
-    if (props.clicked && username) {
-      props.setClicked(false);
-      getRepos(username).then((repos) => {
-        setRepositories(repos);
-      });
-      getUserData(username).then((userData) => {
-        setData(userData);
-      });
+    if (clicked && username) {
+      setClicked(false);
+
+      getUserInfo(username);
+      getRepoData(username);
+
     }
-  }, [username]);
+  }, [username, clicked, getUserInfo, getRepoData, setClicked]);
 
   return (
     <div>

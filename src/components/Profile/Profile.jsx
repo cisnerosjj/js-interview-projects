@@ -2,23 +2,27 @@ import { useState } from "react";
 import DisplayInfo from "../DisplayInfo/DisplayInfo";
 
 const Profile = () => {
-  const [username, setUsername] = useState("");
   const [clicked, setClicked] = useState(false);
+  const [username, setUsername] = useState("");
+
   const [loading, setLoading] = useState(false);
 
   const onChangeHandler = (e) => {
     setUsername(e.target.value);
   };
 
-  const submitHandler = async (e) => {
-    setLoading(true)
+  const submitHandler = (e) => {
     e.preventDefault();
-    setUsername(username)
-    setClicked(true)
 
-    setTimeout(() => {  //just to check loader
-      setLoading(false)
-    }, 2000);
+    setLoading(true);
+
+    setUsername(username);
+
+    setClicked(true);
+
+    setInterval(() => {
+      setLoading(false); //check loader
+    }, 1000);
   };
 
   return (
@@ -55,7 +59,6 @@ const Profile = () => {
             username={username}
             clicked={clicked}
             setClicked={setClicked}
-            loading={setLoading}
           ></DisplayInfo>
         </>
       )}
