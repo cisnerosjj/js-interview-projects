@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import logo from "../../assets/github-image.png"
-import "../Nav/nav.css"
+import logo from "../../assets/github-image.png";
+import "../Home/nav.css";
 
 const Nav = () => {
   return (
-    <div >
-      <nav >
+    <div>
+      <nav>
         <Link to="/">
           <img className="logo" src={logo} alt="Github Logo" height="100x" />
         </Link>

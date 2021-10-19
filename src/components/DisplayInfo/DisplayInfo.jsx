@@ -1,12 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../Context/dataContext";
 import { DataRepoContext } from "../../Context/repoContext";
+import ErrorPage from "./ErrorPage";
+import CardInfo from "./CardInfo";
 
 const DisplayInfo = ({ username, clicked, setClicked }) => {
   const { data } = useContext(DataContext);
   const { error, loading, repositories } = useContext(DataRepoContext);
   const { getUserInfo } = useContext(DataContext);
   const { getRepoData } = useContext(DataRepoContext);
+
+  console.log(repositories);
+  console.log(data.user);
 
   useEffect(() => {
     if (clicked && username) {
@@ -18,7 +23,7 @@ const DisplayInfo = ({ username, clicked, setClicked }) => {
 
   return (
     <>
-      {error && <h1>{error?.response?.status} Oh no! We are in troubles!</h1>}
+      {error && <ErrorPage error={error}></ErrorPage>}
       {loading && (
         <section>
           <div className="d-flex justify-content-center">
@@ -29,6 +34,11 @@ const DisplayInfo = ({ username, clicked, setClicked }) => {
         </section>
       )}
       {!loading && !error && (
+        <div className="container">
+          <CardInfo></CardInfo>
+        </div>
+        /* 
+
         <table className="table table-striped">
           <thead>
             <tr>
@@ -39,7 +49,18 @@ const DisplayInfo = ({ username, clicked, setClicked }) => {
           </thead>
           <tbody>
             <tr>
-              <td>{data?.user?.name}</td>
+              <td>
+                {!data?.user?.avatar_url ? (
+                  ""
+                ) : (
+                  <img
+                    className="container ui small circular image"
+                    src={data?.user?.avatar_url}
+                    alt={data.user?.avatar_url}
+                  />
+                )}
+                {data?.user?.name}
+              </td>
               <td>
                 <a href={data?.user?.organizations_url}>
                   {data?.user?.organizations_url}
@@ -49,7 +70,7 @@ const DisplayInfo = ({ username, clicked, setClicked }) => {
                 {repositories &&
                   repositories.map((repo) => (
                     <div key={repo.name} className="ui relaxed divided list">
-                      <div className="item" style={{ marginLeft: 110 }}>
+                      <div className="item" style={{ marginLeft: 250, width:250 }}>
                         <i className="large github aligned icon"></i>
 
                         <div className="content">
@@ -63,7 +84,7 @@ const DisplayInfo = ({ username, clicked, setClicked }) => {
               </td>
             </tr>
           </tbody>
-        </table>
+        </table> */
       )}
     </>
   );

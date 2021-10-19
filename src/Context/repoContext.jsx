@@ -7,20 +7,20 @@ export const DataRepoContext = React.createContext({});
 export function DataRepoContextProvider({ children }) {
   const [repositories, setRepos] = useState(null);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const getRepoData = (username) => {
-    setError(null)
-    setLoading(true)
-    setRepos(null)
+    setError(null);
+    setLoading(true);
+    setRepos(null);
     getRepos(username)
       .then((res) => {
         setRepos(res);
-        setLoading(false)
+        setLoading(false);
       })
       .catch((error) => {
         setError(error);
-        setLoading(false)
+        setLoading(false);
       });
   };
 

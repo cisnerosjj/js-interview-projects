@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DisplayInfo from "../DisplayInfo/DisplayInfo";
+import DisplayInfo from "./DisplayInfo";
 
 const Profile = () => {
   const [clicked, setClicked] = useState(false);
