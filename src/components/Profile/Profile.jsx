@@ -15,7 +15,6 @@ const Profile = () => {
     setUsername(username);
 
     setClicked(true);
-    console.log("clicke");
   };
 
   return (

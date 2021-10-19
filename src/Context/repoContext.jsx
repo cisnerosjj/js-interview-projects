@@ -15,8 +15,6 @@ export function DataRepoContextProvider({ children }) {
     setRepos(null)
     getRepos(username)
       .then((res) => {
-        console.log("Entra en response")
-
         setRepos(res);
         setLoading(false)
       })

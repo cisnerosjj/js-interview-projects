@@ -14,12 +14,11 @@ const DisplayInfo = ({ username, clicked, setClicked }) => {
       getRepoData(username);
     }
     setClicked(false);
-    console.log(error?.response.status);
   }, [username, clicked, data, error]);
 
   return (
     <>
-      {error && <h1>{error?.response?.status} oh no! We are in troubles!</h1>}
+      {error && <h1>{error?.response?.status} Oh no! We are in troubles!</h1>}
       {loading && (
         <section>
           <div className="d-flex justify-content-center">
