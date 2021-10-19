@@ -10,9 +10,6 @@ const DisplayInfo = ({ username, clicked, setClicked }) => {
   const { getUserInfo } = useContext(DataContext);
   const { getRepoData } = useContext(DataRepoContext);
 
-  console.log(repositories);
-  console.log(data.user);
-
   useEffect(() => {
     if (clicked && username) {
       getUserInfo(username);
