@@ -17,10 +17,6 @@ const Profile = () => {
     setSearch(true);
 
     setClicked(true);
-    if(clicked && !username.length){
-      console.log("papas")
-    }
-  
   };
 
   return (

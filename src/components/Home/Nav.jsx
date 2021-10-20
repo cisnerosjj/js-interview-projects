@@ -9,6 +9,10 @@ const Nav = () => {
     history.goBack();
   };
 
+  const handleNextPage = () => {
+    history.goForward();
+  };
+
   return (
     <div>
       <div className="content">
@@ -17,7 +21,7 @@ const Nav = () => {
         </i>
       </div>
       <div className="content">
-        <i className="redo icon" onClick={handlePreviousPage}>
+        <i className="redo icon" onClick={handleNextPage}>
           <p>Next</p>
         </i>
       </div>

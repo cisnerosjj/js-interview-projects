@@ -1,26 +1,22 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { DataContext } from "../../Context/dataContext";
 import { DataRepoContext } from "../../Context/repoContext";
 import ErrorPage from "./ErrorPage";
 import CardInfo from "./CardInfo";
 
-const DisplayInfo = ({ username, clicked, setClicked }) => {
+const DisplayInfo = ({ username, clicked,setClicked }) => {
   const { data } = useContext(DataContext);
   const { error, loading } = useContext(DataRepoContext);
   const { getUserInfo } = useContext(DataContext);
   const { getRepoData } = useContext(DataRepoContext);
 
   useEffect(() => {
-    if (clicked ) {
-      console.log("please type a user")
-      
-    }
     if (clicked && username) {
       getUserInfo(username);
       getRepoData(username);
     }
-    console.log(clicked);
     setClicked(false);
+
   }, [username, clicked, data, error]);
 
   return (
