@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import logo from "../../assets/github-image.png";
 import "../Home/nav.css";
+import PopUpLogin from "./PopUpLogin";
 
 const Nav = () => {
+  const [showPopUp, setShowPopUp] = useState(false);
   let history = useHistory();
 
   const handlePreviousPage = () => {
@@ -16,7 +19,13 @@ const Nav = () => {
   return (
     <div>
       <div className="content">
-        <button type="button" className="btn btn-primary log">
+        <button
+          type="button"
+          className="btn btn-primary log"
+          onClick={() => {
+            setShowPopUp(true);
+          }}
+        >
           <i className="user icon"></i>
           Log In
         </button>
@@ -36,6 +45,7 @@ const Nav = () => {
           <img className="logo" src={logo} alt="Github Logo" height="100x" />
         </Link>
       </nav>
+      {showPopUp && <PopUpLogin setShowPopUp={setShowPopUp}></PopUpLogin>}
     </div>
   );
 };
