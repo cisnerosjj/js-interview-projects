@@ -16,6 +16,12 @@ const Nav = () => {
   return (
     <div>
       <div className="content">
+        <button type="button" className="btn btn-primary log">
+          <i className="user icon"></i>
+          Log In
+        </button>
+      </div>
+      <div className="content">
         <i className="undo alternate icon" onClick={handlePreviousPage}>
           <p>Previous</p>
         </i>

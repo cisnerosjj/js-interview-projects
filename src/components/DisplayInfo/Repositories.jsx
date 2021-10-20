@@ -6,11 +6,15 @@ const Repositories = () => {
 
   return (
     <>
-    <h3>Lastest Repositories</h3>
-    <hr></hr>
+      <h3>Lastest Repositories</h3>
+      <hr></hr>
       {repositories &&
         repositories.map((repo) => (
-          <div key={repo.name} className="ui relaxed divided list" style={{marginRight: 70}}>
+          <div
+            key={repo.name}
+            className="ui relaxed divided list"
+            style={{ marginRight: 70 }}
+          >
             <div className="item" style={{ marginLeft: 105, width: 250 }}>
               <i className="large github aligned icon"></i>
 

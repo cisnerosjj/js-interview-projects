@@ -21,3 +21,8 @@
   top: 75px;
   right: 50px;
 }
+.log {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
