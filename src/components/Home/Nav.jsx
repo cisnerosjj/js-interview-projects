@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import logo from "../../assets/github-image.png";
 import "../Home/nav.css";
 import PopUpLogin from "./PopUpLogin";
@@ -7,6 +7,9 @@ import PopUpLogin from "./PopUpLogin";
 const Nav = () => {
   const [showPopUp, setShowPopUp] = useState(false);
   let history = useHistory();
+  const location = useLocation();
+
+  const isHome = location.pathname.includes("profile");
 
   const handlePreviousPage = () => {
     history.goBack();
@@ -20,6 +23,7 @@ const Nav = () => {
     <div>
       <div className="content">
         <button
+          hidden={isHome}
           type="button"
           className="btn btn-primary log"
           onClick={() => {
@@ -45,7 +49,9 @@ const Nav = () => {
           <img className="logo" src={logo} alt="Github Logo" height="100x" />
         </Link>
       </nav>
-      {showPopUp && <PopUpLogin setShowPopUp={setShowPopUp}></PopUpLogin>}
+      {showPopUp && !isHome && (
+        <PopUpLogin setShowPopUp={setShowPopUp}></PopUpLogin>
+      )}
     </div>
   );
 };

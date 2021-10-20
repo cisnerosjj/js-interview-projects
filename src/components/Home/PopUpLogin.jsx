@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../Home/PopUpLogin.css";
 
 const PopUpLogin = ({ setShowPopUp }) => {
-    const [nickname, setNickname] = useState()
+  const [nickname, setNickname] = useState();
 
   return (
     <div className="modalBackground">
@@ -20,7 +20,7 @@ const PopUpLogin = ({ setShowPopUp }) => {
           <h3>Enter your name to continue</h3>
         </div>
         <div className="body">
-        <input
+          <input
             className="ui input"
             type="text"
             placeholder="Enter your Name"
@@ -29,7 +29,8 @@ const PopUpLogin = ({ setShowPopUp }) => {
           ></input>
         </div>
         <div className="footer">
-          <button className="ui danger button"
+          <button
+            className="ui danger button"
             onClick={() => {
               setShowPopUp(false);
             }}
@@ -37,7 +38,16 @@ const PopUpLogin = ({ setShowPopUp }) => {
           >
             Cancel
           </button>
-          <button id="continueBtn" className="ui primary button" type="submit">Continue</button>
+          <button
+            id="continueBtn"
+            className="ui primary button"
+            type="submit"
+            onClick={() => {
+              setShowPopUp(false);
+            }}
+          >
+            Continue
+          </button>
         </div>
       </div>
     </div>
