@@ -1,13 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DisplayInfo from "./DisplayInfo";
 
 const Profile = () => {
   const [clicked, setClicked] = useState(false);
   const [search, setSearch] = useState(false);
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(
+    window.localStorage.getItem("username")
+  );
 
+  const setLocalStorage = (value) => {
+    try {
+      setUsername(value);
+      window.localStorage.setItem("username", value);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const onChangeHandler = (e) => {
-    setUsername(e.target.value);
+    setLocalStorage(e.target.value);
   };
 
   const submitHandler = (e) => {
