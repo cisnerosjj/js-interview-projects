@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DisplayInfo from "./DisplayInfo";
 
 const Profile = () => {
   const [clicked, setClicked] = useState(false);
+  const [search, setSearch] = useState(false);
   const [username, setUsername] = useState("");
 
   const onChangeHandler = (e) => {
@@ -13,8 +14,13 @@ const Profile = () => {
     e.preventDefault();
 
     setUsername(username);
+    setSearch(true);
 
     setClicked(true);
+    if(clicked && !username.length){
+      console.log("papas")
+    }
+  
   };
 
   return (
@@ -35,16 +41,19 @@ const Profile = () => {
             className="ui primary button ms-3"
             onClick={submitHandler}
             type="submit"
+            disabled={!username}
           >
             <i className="github icon"></i>
             Search
           </button>
         </div>
-        <DisplayInfo
-          username={username}
-          clicked={clicked}
-          setClicked={setClicked}
-        ></DisplayInfo>
+        {username && search && (
+          <DisplayInfo
+            username={username}
+            clicked={clicked}
+            setClicked={setClicked}
+          ></DisplayInfo>
+        )}
       </>
     </div>
   );

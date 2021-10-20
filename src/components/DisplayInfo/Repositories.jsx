@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { DataRepoContext } from "../../Context/repoContext";
 
 const Repositories = () => {
-  const { error, loading, repositories } = useContext(DataRepoContext);
+  const { repositories } = useContext(DataRepoContext);
 
   return (
     <>

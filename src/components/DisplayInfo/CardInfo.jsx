@@ -20,7 +20,7 @@ const CardInfo = () => {
       <div className="display-flex" style={{display: "inline-flex"}}>
         <div className="ui card col-4" style={{ width: 320, height: 530, marginRight: 5  }}>
           <div className="image">
-            <img src={data?.user?.avatar_url}></img>
+            <img src={data?.user?.avatar_url} alt={data?.user?.avatar_url}></img>
           </div>
           <div className="content" style={{maxHeight: 130}}>
             <h4 className="header">{data?.user?.name}</h4>
@@ -38,7 +38,7 @@ const CardInfo = () => {
             </div>
           </div>
           <div className="extra content">
-            <button onClick={handleShowRepos} className="button">
+            <button onClick={handleShowRepos} className="ui primary button ms-3">
               Show Repositories
             </button>
             <p></p>
