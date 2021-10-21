@@ -4,14 +4,11 @@ import DisplayInfo from "./DisplayInfo";
 
 const Profile = () => {
   const [clicked, setClicked] = useState(false);
-  const [search, setSearch] = useState(false);
-  const [username, setUsername] = useLocalStorage("text", " ");
+  const [username, setUsername] = useLocalStorage("text", "");
 
   const submitHandler = (e) => {
     e.preventDefault();
-
     setUsername(username);
-    setSearch(true);
 
     setClicked(true);
   };

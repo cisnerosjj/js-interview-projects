@@ -1,9 +1,7 @@
-import { useContext, useEffect, useState } from "react";
-import { DataContext } from "../../Context/dataContext";
-import { useLocalStorage } from "../../hooks/useLocaStorage";
+import { useState } from "react";
 import Repositories from "./Repositories";
 
-const CardInfo = ({data}) => {
+const CardInfo = ({ data }) => {
   const [showRepos, setshowRepos] = useState(false);
 
   const handleShowRepos = (e) => {
