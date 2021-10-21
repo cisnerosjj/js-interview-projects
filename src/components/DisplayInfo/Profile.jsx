@@ -39,7 +39,7 @@ const Profile = () => {
           Search
         </button>
       </div>
-      {username && search && (
+      {username && (
         <DisplayInfo
           username={username}
           clicked={clicked}
