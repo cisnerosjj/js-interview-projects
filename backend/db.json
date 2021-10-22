@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "password": "$2b$10$xzRKVgPxDUmqTn3Fvi3FAuxi5SBwNcB./TwXL1sHwkjprQXuWn2bK",
+      "id": 1
+    },
+    {
+      "username": "paco",
+      "password": "$2b$10$RazcNKP54pxUFQiwOmX/N.ndDOAQArgD/Imxbo032YpM7Yj5lMtD6",
+      "id": 2
+    },
+    {
+      "username": "jorge",
+      "password": "$2b$10$RazcNKP54pxUFQiwOmX/N.ndDOAQArgD/Imxbo032YpM7Yj5lMtD6",
+      "id":3
+    }
+  ]
+}
