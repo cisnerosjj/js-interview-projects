@@ -35,12 +35,16 @@ const Nav = () => {
         </button>
       </div>
       <div className="content">
-        <i className="undo alternate icon" onClick={handlePreviousPage}>
+        <i
+          className="undo alternate icon"
+          hidden={!isHome}
+          onClick={handlePreviousPage}
+        >
           <p>Previous</p>
         </i>
       </div>
       <div className="content">
-        <i className="redo icon" onClick={handleNextPage}>
+        <i className="redo icon" hidden={!isHome} onClick={handleNextPage}>
           <p>Next</p>
         </i>
       </div>
