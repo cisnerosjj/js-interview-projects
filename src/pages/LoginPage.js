@@ -20,7 +20,7 @@ export default function LoginPage() {
           <label htmlFor="username">Username</label>
           <input
             id="username"
-            type="email"
+            type="text"
             value={username}
             name="username"
             placeholder="Username"
