@@ -7,6 +7,7 @@ export default function LoginPage() {
 
   const submitHandler = e => {
     e.preventDefault();
+    login(username, password);
   };
 
   return (
