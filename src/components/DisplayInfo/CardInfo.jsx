@@ -20,10 +20,11 @@ const CardInfo = ({ data }) => {
           style={{ width: 320, height: 530, marginRight: 5 }}
         >
           <div className="image">
-            <img
-              src={data?.user?.avatar_url}
-              alt={data?.user?.avatar_url}
-            ></img>
+            {data.user.avatar_url ? (
+              <img src={data.user.avatar_url} alt={data.user.avatar_url}></img>
+            ) : (
+              ""
+            )}
           </div>
           <div className="content" style={{ maxHeight: 130 }}>
             <h4 className="header">{data?.user?.name}</h4>
@@ -32,12 +33,16 @@ const CardInfo = ({ data }) => {
             </div>
             <div className="description">
               Orgs:
-              <a
-                href={data?.user?.organizations_url}
-                style={{ textDecoration: "none" }}
-              >
-                {data?.user?.organizations_url}
-              </a>
+              {data.user.organizations_url ? (
+                <a
+                  href={data.user.organizations_url}
+                  style={{ textDecoration: "none" }}
+                >
+                  {data.user.organizations_url}
+                </a>
+              ) : (
+                ""
+              )}
             </div>
           </div>
           <div className="extra content">
@@ -51,7 +56,7 @@ const CardInfo = ({ data }) => {
             <div>
               <i className="user icon"></i>
               Followers:&nbsp;&nbsp;
-              {data?.user?.followers}
+              {data.user.followers ? data.user.followers : ""}
             </div>
           </div>
         </div>

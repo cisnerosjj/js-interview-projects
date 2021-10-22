@@ -16,7 +16,7 @@ const DisplayInfo = ({ username, clicked, setClicked }) => {
       getRepoData(username);
       setClicked(false);
     }
-  }, [clicked, data,username]);
+  }, [clicked, data, username]);
 
   return (
     <>
@@ -31,7 +31,7 @@ const DisplayInfo = ({ username, clicked, setClicked }) => {
           </div>
         </section>
       ) : (
-        data?.user && (
+        data.user && (
           <div className="container">
             <CardInfo data={data}></CardInfo>
           </div>
