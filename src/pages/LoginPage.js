@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { login } from './../components/auth/Login'
+import React, { useState } from "react";
+import { login } from "./../components/auth/Login";
 
 export default function LoginPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-  const submitHandler = e => {
+  const submitHandler = (e) => {
     e.preventDefault();
     login(username, password);
   };
@@ -25,7 +25,7 @@ export default function LoginPage() {
             name="username"
             placeholder="Username"
             required
-            onChange={e => setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div>
@@ -37,14 +37,12 @@ export default function LoginPage() {
             name="password"
             placeholder="Contraseña"
             required
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div>
           <label />
-          <button type="submit">
-            Entrar
-          </button>
+          <button type="submit">Entrar</button>
         </div>
         {/* TODO: Register */}
         {/* <div>

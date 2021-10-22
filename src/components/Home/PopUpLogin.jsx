@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
+import { login } from "../auth/Login";
 import "../Home/PopUpLogin.css";
 
 const PopUpLogin = ({ setShowPopUp }) => {
-  const [nickname, setNickname] = useState();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const onSubmitRegister = (e) => {
     e.preventDefault();
-    // setAccessToken()
+    // register(username, password);
   };
 
   const onSubmitLogin = (e) => {
     e.preventDefault();
-    // setAccessToken()
+    login(username, password);
+    
   };
   const toggleSignup = () => {
     document.getElementById("login-toggle").style.backgroundColor = "#fff";
@@ -31,8 +34,8 @@ const PopUpLogin = ({ setShowPopUp }) => {
     document.getElementById("login-form").style.display = "block";
   };
   useEffect(() => {
-    toggleLogin();
     toggleSignup();
+    toggleLogin();
   }, []);
 
   return (
@@ -61,9 +64,22 @@ const PopUpLogin = ({ setShowPopUp }) => {
 
           <div id="login-form">
             <form onSubmit={onSubmitLogin}>
-              <input type="text" placeholder="Enter username" />
-              <input type="password" placeholder="Enter password" />
-              <button type="button" className="btn login">
+              <input
+                type="text"
+                placeholder="Enter username"
+                required
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+
+              <input
+                type="password"
+                required
+                value={password}
+                placeholder="Enter password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button type="submit" className="btn login">
                 login
               </button>
             </form>
@@ -71,8 +87,20 @@ const PopUpLogin = ({ setShowPopUp }) => {
 
           <div id="signup-form">
             <form onSubmit={onSubmitRegister}>
-              <input type="text" placeholder="Choose username" />
-              <input type="password" placeholder="Create password" />
+              <input
+                type="text"
+                required
+                value={username}
+                placeholder="Choose username"
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <input
+                type="password"
+                required
+                value={password}
+                placeholder="Create password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
               <button type="button" className="btn signup">
                 <i className="fa fa-spinner fa-pulse"></i> create account
               </button>
