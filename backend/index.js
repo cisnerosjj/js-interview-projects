@@ -114,7 +114,7 @@ server.use(jsonServer.bodyParser)
 
 
 server.post('/auth/login', (req, res) => {
-  const { username, password } = req.body
+  const { user: username, pass:password } = req.body
   if (username && password) {
     const authenticatedUser = getAuthenticatedUser(username, password)
     if (!authenticatedUser) {
