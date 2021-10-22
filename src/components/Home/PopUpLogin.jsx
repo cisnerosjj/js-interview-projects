@@ -4,8 +4,14 @@ import "../Home/PopUpLogin.css";
 const PopUpLogin = ({ setShowPopUp }) => {
   const [nickname, setNickname] = useState();
 
-  const onSubmit = (e) => {
+  const onSubmitRegister = (e) => {
     e.preventDefault();
+    // setAccessToken()
+  };
+
+  const onSubmitLogin = (e) => {
+    e.preventDefault();
+    // setAccessToken()
   };
   const toggleSignup = () => {
     document.getElementById("login-toggle").style.backgroundColor = "#fff";
@@ -54,7 +60,7 @@ const PopUpLogin = ({ setShowPopUp }) => {
           </div>
 
           <div id="login-form">
-            <form>
+            <form onSubmit={onSubmitLogin}>
               <input type="text" placeholder="Enter username" />
               <input type="password" placeholder="Enter password" />
               <button type="button" className="btn login">
@@ -64,8 +70,7 @@ const PopUpLogin = ({ setShowPopUp }) => {
           </div>
 
           <div id="signup-form">
-            <form>
-              {/* <input type="email" placeholder="Enter your email" /> */}
+            <form onSubmit={onSubmitRegister}>
               <input type="text" placeholder="Choose username" />
               <input type="password" placeholder="Create password" />
               <button type="button" className="btn signup">
