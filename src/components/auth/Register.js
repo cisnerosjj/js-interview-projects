@@ -1,18 +1,16 @@
 import axios, { setAuthorizationHeader } from "./axiosClient";
 import storage from "../../utils/storage";
 
-export const register = async (user, pass) => {
-  const accessToken = await axios.post(`http://localhost:8000/auth/register`, {
+export const register = (user, pass) => {
+  const accessToken = axios.post(`http://localhost:8000/auth/register`, {
     user,
     pass,
   });
   try {
     setAuthorizationHeader(accessToken);
-    console.log("he llegao aqui");
     storage.set("token", accessToken);
     return accessToken;
   } catch (err) {
-    console.log("error aqui");
     console.log(err);
   }
 

@@ -7,9 +7,8 @@ export const login = async (user, pass) => {
     pass,
   });
   try {
-    setAuthorizationHeader(accessToken);
+    // setAuthorizationHeader(accessToken);
     storage.set("token", accessToken);
-    console.log(user, pass);
     return accessToken;
   } catch (err) {
     console.log(err);

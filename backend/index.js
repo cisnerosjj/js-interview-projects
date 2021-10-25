@@ -136,8 +136,7 @@ server.post("/auth/login", (req, res) => {
 });
 
 server.post("/auth/register", (req, res, next) => {
-  const { username, password } = req.body;
-  console.log(username, password);
+  const { user: username, pass: password } = req.body;
   if (username && password) {
     if (userExists(username)) {
       return res.status(400).json({ message: "Username is taken" });

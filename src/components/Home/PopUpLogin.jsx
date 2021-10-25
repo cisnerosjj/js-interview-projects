@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { setAuthorizationHeader } from "../auth/axiosClient";
 import { login } from "../auth/Login";
 import { register } from "../auth/Register";
 import "../Home/PopUpLogin.css";
@@ -12,13 +14,13 @@ const PopUpLogin = ({ setShowPopUp }) => {
   const onSubmitRegister = (e) => {
     e.preventDefault();
     register(newUsername, newPassword);
-    console.log(newUsername, newPassword);
-    // register(username, password);
+    setShowPopUp(false);
   };
 
   const onSubmitLogin = (e) => {
     e.preventDefault();
     login(username, password);
+    setShowPopUp(false);
   };
   const toggleSignup = () => {
     document.getElementById("login-toggle").style.backgroundColor = "#fff";
