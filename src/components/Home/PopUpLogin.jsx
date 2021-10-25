@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import { setAuthorizationHeader } from "../auth/axiosClient";
 import { login } from "../auth/Login";
 import { register } from "../auth/Register";
 import "../Home/PopUpLogin.css";

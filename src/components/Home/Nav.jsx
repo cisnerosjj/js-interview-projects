@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import logo from "../../assets/github-image.png";
+import storage from "../../utils/storage";
 import "../Home/nav.css";
 import PopUpLogin from "./PopUpLogin";
 
 const Nav = () => {
   const [showPopUp, setShowPopUp] = useState(false);
+  const [isCurrentUser, setIsCurrentUser] = useState(false);
+
   let history = useHistory();
   const location = useLocation();
+  const isActivate = localStorage.getItem("token", "");
+
+  useEffect(() => {
+    if (isActivate !== null) {
+      setIsCurrentUser(true);
+    }
+  }, [isActivate]);
 
   const isHome = location.pathname.includes("profile");
 
@@ -19,20 +29,36 @@ const Nav = () => {
     history.goForward();
   };
 
+  const signOut = () => {
+    storage.remove("token");
+  };
+
   return (
     <div>
       <div className="content">
-        <button
-          hidden={isHome}
-          type="button"
-          className="btn btn-primary log"
-          onClick={() => {
-            setShowPopUp(true);
-          }}
-        >
-          <i className="user icon"></i>
-          Log In
-        </button>
+        {!isActivate ? (
+          <button
+            hidden={isHome}
+            type="button"
+            className="btn btn-primary log"
+            onClick={() => {
+              setShowPopUp(true);
+            }}
+          >
+            <i className="user icon"></i>
+            Log In
+          </button>
+        ) : (
+          <button
+            hidden={isHome}
+            type="button"
+            className="btn btn-primary log"
+            onClick={signOut}
+          >
+            <i className="user icon"></i>
+            Sign Out
+          </button>
+        )}
       </div>
       <div className="content">
         <i
