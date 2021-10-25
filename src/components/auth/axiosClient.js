@@ -1,12 +1,12 @@
-import axios from 'axios';
+import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: 'http://localhost:8000'
+  baseURL: "http://localhost:8000",
 });
 
 axiosClient.interceptors.response.use(
-  response => response.data,
-  error => {
+  (response) => response.data,
+  (error) => {
     if (!error.response) {
       return Promise.reject({ message: error.message });
     }
@@ -14,13 +14,13 @@ axiosClient.interceptors.response.use(
       message: error.response.statusText,
       ...error.response.data,
     });
-  },
+  }
 );
 
-export const setAuthorizationHeader = token => {
+export const setAuthorizationHeader = (token) => {
   const { accessToken } = token;
   axiosClient.defaults.headers.common[
-    'Authorization'
+    "Authorization"
   ] = `Bearer ${accessToken}`;
 };
 

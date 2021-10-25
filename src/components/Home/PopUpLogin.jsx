@@ -1,20 +1,24 @@
 import { useEffect, useState } from "react";
 import { login } from "../auth/Login";
+import { register } from "../auth/Register";
 import "../Home/PopUpLogin.css";
 
 const PopUpLogin = ({ setShowPopUp }) => {
   const [username, setUsername] = useState("");
+  const [newUsername, setNewUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
 
   const onSubmitRegister = (e) => {
     e.preventDefault();
+    register(newUsername, newPassword);
+    console.log(newUsername, newPassword);
     // register(username, password);
   };
 
   const onSubmitLogin = (e) => {
     e.preventDefault();
     login(username, password);
-    
   };
   const toggleSignup = () => {
     document.getElementById("login-toggle").style.backgroundColor = "#fff";
@@ -89,19 +93,17 @@ const PopUpLogin = ({ setShowPopUp }) => {
             <form onSubmit={onSubmitRegister}>
               <input
                 type="text"
-                required
-                value={username}
+                value={newUsername}
                 placeholder="Choose username"
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => setNewUsername(e.target.value)}
               />
               <input
                 type="password"
-                required
-                value={password}
+                value={newPassword}
                 placeholder="Create password"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setNewPassword(e.target.value)}
               />
-              <button type="button" className="btn signup">
+              <button type="submit" className="btn signup">
                 <i className="fa fa-spinner fa-pulse"></i> create account
               </button>
             </form>
