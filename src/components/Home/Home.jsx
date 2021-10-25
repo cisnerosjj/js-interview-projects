@@ -22,14 +22,12 @@ const Home = () => {
       <div className="typewriter">
         <h1>Find Github Users!</h1>
       </div>
-      {isCurrentUser ? (
+      {isCurrentUser && (
         <Link to="/profile">
           <button type="button" className="btn btn-primary btn-lg">
             Start!
           </button>
         </Link>
-      ) : (
-        ""
       )}
     </>
   );

@@ -37,27 +37,31 @@ const Nav = () => {
     <div>
       <div className="content">
         {!isActivate ? (
-          <button
-            hidden={isHome}
-            type="button"
-            className="btn btn-primary log"
-            onClick={() => {
-              setShowPopUp(true);
-            }}
-          >
-            <i className="user icon"></i>
-            Log In
-          </button>
+          <Link to="/">
+            <button
+              hidden={isHome}
+              type="button"
+              className="btn btn-primary log"
+              onClick={() => {
+                setShowPopUp(true);
+              }}
+            >
+              <i className="user icon"></i>
+              Log In
+            </button>
+          </Link>
         ) : (
-          <button
-            hidden={isHome}
-            type="button"
-            className="btn btn-primary log"
-            onClick={signOut}
-          >
-            <i className="user icon"></i>
-            Sign Out
-          </button>
+          <Link to="/">
+            <button
+              hidden={isHome}
+              type="button"
+              className="btn btn-primary log"
+              onClick={signOut}
+            >
+              <i className="user icon"></i>
+              Sign Out
+            </button>
+          </Link>
         )}
       </div>
       <div className="content">

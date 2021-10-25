@@ -136,7 +136,6 @@ server.post("/auth/login", (req, res) => {
 });
 
 server.post("/auth/register", (req, res, next) => {
-  // debugger
   const { username,  password } = req.body;
   if (username && password) {
     if (userExists(username)) {
