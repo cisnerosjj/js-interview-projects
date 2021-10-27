@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { LoginContext } from "../../Context/loginContext";
 import "../Home/home.css";
 
 const Home = () => {
-  const [isCurrentUser, setIsCurrentUser] = useState(false);
-
-  const isActivate = localStorage.getItem("token", "");
+  const [isCurrentUser, setIsCurrentUser] = useState();
+  const { isLogin } = useContext(LoginContext);
 
   useEffect(() => {
-    if (isActivate !== null) {
+    if (isLogin) {
       setIsCurrentUser(true);
-    }
+    } else setIsCurrentUser(false);
+  }, [isLogin]);
 
-    if (isActivate !== null && isCurrentUser === false) {
-      setIsCurrentUser(true);
-    }
-  }, [isActivate, isCurrentUser, setIsCurrentUser]);
+  console.log(isLogin);
+  console.log(isCurrentUser);
 
   return (
     <>

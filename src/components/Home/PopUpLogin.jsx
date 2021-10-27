@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { login } from "../auth/Login";
 import { register } from "../auth/Register";
 import "../Home/PopUpLogin.css";
@@ -8,6 +9,8 @@ const PopUpLogin = ({ setShowPopUp }) => {
   const [newUsername, setNewUsername] = useState("");
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+
+  const history = useHistory();
 
   const onSubmitRegister = (e) => {
     e.preventDefault();
@@ -19,6 +22,7 @@ const PopUpLogin = ({ setShowPopUp }) => {
     e.preventDefault();
     login(username, password);
     setShowPopUp(false);
+    history.push("/")
   };
   const toggleSignup = () => {
     document.getElementById("login-toggle").style.backgroundColor = "#fff";
