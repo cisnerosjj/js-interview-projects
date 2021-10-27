@@ -3,12 +3,15 @@ import { useHistory } from "react-router-dom";
 import { login } from "../auth/Login";
 import { register } from "../auth/Register";
 import "../Home/PopUpLogin.css";
+import { useContext } from "react";
+import { LoginContext } from "../../Context/loginContext";
 
 const PopUpLogin = ({ setShowPopUp }) => {
   const [username, setUsername] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const {setIsLogin} = useContext(LoginContext)
 
   const history = useHistory();
 
@@ -18,9 +21,12 @@ const PopUpLogin = ({ setShowPopUp }) => {
     setShowPopUp(false);
   };
 
-  const onSubmitLogin = (e) => {
+  const onSubmitLogin = async (e) => {
     e.preventDefault();
-    login(username, password);
+    const token = await login(username, password);
+    if(token) {
+      setIsLogin(true)
+    }
     setShowPopUp(false);
     history.push("/")
   };
