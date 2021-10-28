@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import logo from "../../assets/github-image.png";
+import { LoginContext } from "../../Context/loginContext";
 import storage from "../../utils/storage";
 import "../Home/nav.css";
 import PopUpLogin from "./PopUpLogin";
 
 const Nav = () => {
   const [showPopUp, setShowPopUp] = useState(false);
-  const [isCurrentUser, setIsCurrentUser] = useState(false);
+  const { setIsLogin } = useContext(LoginContext);
 
   let history = useHistory();
   const location = useLocation();
@@ -15,7 +16,7 @@ const Nav = () => {
 
   useEffect(() => {
     if (isActivate !== null) {
-      setIsCurrentUser(true);
+      setIsLogin(true);
     }
   }, [isActivate]);
 
@@ -31,6 +32,7 @@ const Nav = () => {
 
   const signOut = () => {
     storage.remove("token");
+    setIsLogin(false);
   };
 
   return (
