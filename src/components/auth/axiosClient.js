@@ -17,11 +17,11 @@ axiosClient.interceptors.response.use(
   }
 );
 
-export const setAuthorizationHeader = (token) => {
+/* export const setAuthorizationHeader = (token) => {
   const { accessToken } = token;
   axiosClient.defaults.headers.common[
     "Authorization"
   ] = `Bearer ${accessToken}`;
-};
+}; */
 
 export default axiosClient;
