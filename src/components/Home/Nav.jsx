@@ -8,8 +8,7 @@ import PopUpLogin from "./PopUpLogin";
 
 const Nav = () => {
   const [showPopUp, setShowPopUp] = useState(false);
-  const { setIsLogin } = useContext(LoginContext);
-  const [isCurrentUser, setIsCurrentUser] = useState(false);
+  const { setIsLogin, isLogin } = useContext(LoginContext);
 
   let history = useHistory();
   const location = useLocation();
@@ -18,7 +17,6 @@ const Nav = () => {
   useEffect(() => {
     if (isActivate !== null) {
       setIsLogin(true);
-      setIsCurrentUser(true);
     }
   }, [isActivate]);
 
@@ -40,7 +38,7 @@ const Nav = () => {
   return (
     <div>
       <div className="content">
-        {!isActivate ? (
+        {!isLogin ? (
           <Link to="/">
             <button
               hidden={isHome}

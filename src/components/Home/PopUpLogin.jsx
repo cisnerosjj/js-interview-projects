@@ -23,11 +23,7 @@ const PopUpLogin = ({ setShowPopUp }) => {
 
   const onSubmitLogin = async (e) => {
     e.preventDefault();
-    const token = login(username, password);
-
-    if (token) {
-      setIsLogin(true);
-    } else console.log("error");
+    login(username, password);
     setShowPopUp(false);
     history.push("/");
   };
