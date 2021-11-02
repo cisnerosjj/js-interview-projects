@@ -5,14 +5,13 @@ import { register } from "../auth/Register";
 import "../Home/PopUpLogin.css";
 import { useContext } from "react";
 import { LoginContext } from "../../Context/loginContext";
-import storage from "../../utils/storage";
 
 const PopUpLogin = ({ setShowPopUp }) => {
   const [username, setUsername] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const { setIsLogin, login } = useContext(LoginContext);
+  const { setIsLogin, login, error } = useContext(LoginContext);
 
   const history = useHistory();
 
@@ -24,12 +23,11 @@ const PopUpLogin = ({ setShowPopUp }) => {
 
   const onSubmitLogin = async (e) => {
     e.preventDefault();
-    // login(username, password);
     const token = login(username, password);
 
     if (token) {
       setIsLogin(true);
-    }
+    } else console.log("error");
     setShowPopUp(false);
     history.push("/");
   };

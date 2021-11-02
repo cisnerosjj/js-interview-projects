@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import axiosClient, { setAuthorizationHeader } from "../components/auth/axiosClient";
+import axiosClient, {
+  setAuthorizationHeader,
+} from "../components/auth/axiosClient";
 import storage from "../utils/storage";
+import { ToastContainer, toast } from "react-toastify";
 
 export const LoginContext = React.createContext({});
 
@@ -19,7 +22,7 @@ export function LoginContextProvider({ children }) {
       );
       storage.set("token", accessToken);
       return accessToken;
-    } catch (err) {
+    } catch (error) {
       setError(error);
     }
   };
