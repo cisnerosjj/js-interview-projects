@@ -5,6 +5,7 @@ import "../Home/home.css";
 
 const Home = () => {
   const { isLogin } = useContext(LoginContext);
+  const { setIsLogin, error } = useContext(LoginContext);
 
   return (
     <>

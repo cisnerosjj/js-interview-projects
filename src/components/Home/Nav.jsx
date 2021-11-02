@@ -9,6 +9,7 @@ import PopUpLogin from "./PopUpLogin";
 const Nav = () => {
   const [showPopUp, setShowPopUp] = useState(false);
   const { setIsLogin } = useContext(LoginContext);
+  const [isCurrentUser, setIsCurrentUser] = useState(false);
 
   let history = useHistory();
   const location = useLocation();
@@ -17,6 +18,7 @@ const Nav = () => {
   useEffect(() => {
     if (isActivate !== null) {
       setIsLogin(true);
+      setIsCurrentUser(true);
     }
   }, [isActivate]);
 

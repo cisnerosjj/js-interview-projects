@@ -1,8 +1,9 @@
-// import { setAuthorizationHeader } from "./axiosClient";
+/* import { setAuthorizationHeader } from "./axiosClient";
 import storage from "../../utils/storage";
-import axiosClient from "./axiosClient";
+import axiosClient, { setAuthorizationHeader } from "./axiosClient";
 
 export const login = async (user, pass) => {
+  debugger
   try {
     const accessToken = await axiosClient.post(
       `http://localhost:8000/auth/login`,
@@ -11,10 +12,10 @@ export const login = async (user, pass) => {
         pass,
       }
     );
-    // setAuthorizationHeader(accessToken);
+    setAuthorizationHeader(accessToken)
     storage.set("token", accessToken);
     return accessToken;
   } catch (err) {
-    console.log(err);
+    throw console.error(err.message);
   }
-};
+}; */

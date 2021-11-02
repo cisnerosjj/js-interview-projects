@@ -5,7 +5,7 @@ const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.response.use(
-  (response) => response.data,
+  (response) => response,
   (error) => {
     if (!error.response) {
       return Promise.reject({ message: error.message });
@@ -17,11 +17,10 @@ axiosClient.interceptors.response.use(
   }
 );
 
-/* export const setAuthorizationHeader = (token) => {
+export const setAuthorizationHeader = (token) => {
+  console.log(token, "**********");
   const { accessToken } = token;
-  axiosClient.defaults.headers.common[
-    "Authorization"
-  ] = `Bearer ${accessToken}`;
-}; */
+  axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+};
 
 export default axiosClient;
