@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Repositories from "./Repositories";
 
-const CardInfo = ({ data }) => {
+const CardInfo = ({ userData, username }) => {
   const [showRepos, setshowRepos] = useState(false);
 
   const handleShowRepos = (e) => {
@@ -20,25 +20,28 @@ const CardInfo = ({ data }) => {
           style={{ width: 320, height: 530, marginRight: 5 }}
         >
           <div className="image">
-            {data.user.avatar_url ? (
-              <img src={data.user.avatar_url} alt={data.user.avatar_url}></img>
+            {userData.user.avatar_url ? (
+              <img
+                src={userData.user.avatar_url}
+                alt={userData.user.avatar_url}
+              ></img>
             ) : (
               ""
             )}
           </div>
           <div className="content" style={{ maxHeight: 130 }}>
-            <h4 className="header">{data?.user?.name}</h4>
+            <h4 className="header">{userData?.user?.name}</h4>
             <div className="meta">
-              <span className="date">{data?.user?.location}</span>
+              <span className="date">{userData?.user?.location}</span>
             </div>
             <div className="description">
               Orgs:
-              {data.user.organizations_url ? (
+              {userData.user.organizations_url ? (
                 <a
-                  href={data.user.organizations_url}
+                  href={userData.user.organizations_url}
                   style={{ textDecoration: "none" }}
                 >
-                  {data.user.organizations_url}
+                  {userData.user.organizations_url}
                 </a>
               ) : (
                 ""
@@ -56,12 +59,12 @@ const CardInfo = ({ data }) => {
             <div>
               <i className="user icon"></i>
               Followers:&nbsp;&nbsp;
-              {data.user.followers ? data.user.followers : ""}
+              {userData.user.followers ? userData.user.followers : ""}
             </div>
           </div>
         </div>
         <div className="col-8">
-          {showRepos && <Repositories></Repositories>}
+          {showRepos && <Repositories username={username}></Repositories>}
         </div>
       </div>
     </>

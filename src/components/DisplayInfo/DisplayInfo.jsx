@@ -1,22 +1,29 @@
-import { useContext, useEffect } from "react";
-import { DataContext } from "../../Context/dataContext";
-import { DataRepoContext } from "../../Context/repoContext";
+import { useEffect, useState } from "react";
 import ErrorPage from "./ErrorPage";
 import CardInfo from "./CardInfo";
+import { getUserData } from "../../Services/ApiGithubService";
 
 const DisplayInfo = ({ username, clicked, setClicked }) => {
-  const { data } = useContext(DataContext);
-  const { error, loading } = useContext(DataRepoContext);
-  const { getUserInfo } = useContext(DataContext);
-  const { getRepoData } = useContext(DataRepoContext);
+  const [userData, setUserData] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (clicked && username) {
-      getUserInfo(username);
-      getRepoData(username);
-      setClicked(false);
+      getUserData(username)
+        .then((data) => {
+          setUserData(data);
+          setClicked(false);
+          setLoading(true);
+        })
+        .catch((error) => {
+          setError(error);
+        });
     }
-  }, [clicked, data, username]);
+    if (userData) {
+      setLoading(false);
+    }
+  }, [clicked, userData, username]);
 
   return (
     <>
@@ -31,9 +38,9 @@ const DisplayInfo = ({ username, clicked, setClicked }) => {
           </div>
         </section>
       ) : (
-        data.user && (
+        userData.user && (
           <div className="container">
-            <CardInfo data={data}></CardInfo>
+            <CardInfo userData={userData} username={username}></CardInfo>
           </div>
         )
       )}

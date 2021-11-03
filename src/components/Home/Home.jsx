@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { useLocalStorage } from "../../hooks/useLocaStorage";
 import { LoginContext } from "../../Context/loginContext";
 import "../Home/home.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,8 +9,10 @@ import "react-toastify/dist/ReactToastify.css";
 const Home = () => {
   const { isLogin, setIsLogin } = useContext(LoginContext);
   const { error } = useContext(LoginContext);
+  const [username, setUsername] = useLocalStorage("text", "");
 
   useEffect(() => {
+    setUsername("");
     if (error && !isLogin) {
       console.log(error);
       toast(error?.message, {
