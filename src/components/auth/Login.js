@@ -1,4 +1,4 @@
-import axios, { Axios } from "axios";
+import axios from "axios";
 import storage from "../../utils/storage";
 
 export const login = async (user, pass) => {
