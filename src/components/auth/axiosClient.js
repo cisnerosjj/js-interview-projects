@@ -18,7 +18,6 @@ axiosClient.interceptors.response.use(
 );
 
 export const setAuthorizationHeader = (token) => {
-  console.log(token, "**********");
   const { accessToken } = token;
   axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
 };
