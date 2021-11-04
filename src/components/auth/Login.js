@@ -1,7 +1,5 @@
 import axios, { Axios } from "axios";
 import storage from "../../utils/storage";
-// import axiosClient from "./axiosClient";
-// import axiosClientfrom "./axiosClient";
 
 export const login = async (user, pass) => {
   try {
