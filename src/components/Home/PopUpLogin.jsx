@@ -2,16 +2,15 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { login } from "../auth/Login";
 import { register } from "../auth/Register";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../Home/PopUpLogin.css";
-import { useContext } from "react";
-import { LoginContext } from "../../Context/loginContext";
 
 const PopUpLogin = ({ setShowPopUp }) => {
   const [username, setUsername] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const { setIsLogin, login, error } = useContext(LoginContext);
 
   const history = useHistory();
 
@@ -23,7 +22,17 @@ const PopUpLogin = ({ setShowPopUp }) => {
 
   const onSubmitLogin = async (e) => {
     e.preventDefault();
-    login(username, password);
+    login(username, password).catch((error) => {
+      toast(error?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    });
     setShowPopUp(false);
     history.push("/");
   };
@@ -50,74 +59,76 @@ const PopUpLogin = ({ setShowPopUp }) => {
   }, []);
 
   return (
-    <div className="modalBackground">
-      <div className="container">
-        <div className="form-modal">
-          <div className="titleCloseBtn">
-            <button
-              onClick={() => {
-                setShowPopUp(false);
-              }}
-            >
-              X
-            </button>
-          </div>
-          <div className="form-toggle">
-            {
-              <button id="login-toggle" onClick={toggleLogin}>
-                log in
-              </button>
-            }
-            <button id="signup-toggle" onClick={toggleSignup}>
-              Register
-            </button>
-          </div>
+    <>
+      <ToastContainer></ToastContainer>
 
-          <div id="login-form">
-            <form onSubmit={onSubmitLogin}>
-              <input
-                type="text"
-                placeholder="Enter username"
-                required
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-
-              <input
-                type="password"
-                required
-                value={password}
-                placeholder="Enter password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <button type="submit" className="btn login">
-                login
+      <div className="modalBackground">
+        <div className="container">
+          <div className="form-modal">
+            <div className="titleCloseBtn">
+              <button
+                onClick={() => {
+                  setShowPopUp(false);
+                }}
+              >
+                X
               </button>
-            </form>
-          </div>
-
-          <div id="signup-form">
-            <form onSubmit={onSubmitRegister}>
-              <input
-                type="text"
-                value={newUsername}
-                placeholder="Choose username"
-                onChange={(e) => setNewUsername(e.target.value)}
-              />
-              <input
-                type="password"
-                value={newPassword}
-                placeholder="Create password"
-                onChange={(e) => setNewPassword(e.target.value)}
-              />
-              <button type="submit" className="btn signup">
-                <i className="fa fa-spinner fa-pulse"></i> create account
+            </div>
+            <div className="form-toggle">
+              {
+                <button id="login-toggle" onClick={toggleLogin}>
+                  log in
+                </button>
+              }
+              <button id="signup-toggle" onClick={toggleSignup}>
+                Register
               </button>
-            </form>
+            </div>
+
+            <div id="login-form">
+              <form onSubmit={onSubmitLogin}>
+                <input
+                  type="text"
+                  placeholder="Enter username"
+                  required
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+                <input
+                  type="password"
+                  required
+                  value={password}
+                  placeholder="Enter password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <button type="submit" className="btn login">
+                  login
+                </button>
+              </form>
+            </div>
+            <div id="signup-form">
+              <form onSubmit={onSubmitRegister}>
+                <input
+                  type="text"
+                  value={newUsername}
+                  placeholder="Choose username"
+                  onChange={(e) => setNewUsername(e.target.value)}
+                />
+                <input
+                  type="password"
+                  value={newPassword}
+                  placeholder="Create password"
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
+                <button type="submit" className="btn signup">
+                  <i className="fa fa-spinner fa-pulse"></i> create account
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

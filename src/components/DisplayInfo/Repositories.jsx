@@ -2,14 +2,18 @@ import { useEffect, useState } from "react";
 import { getRepos } from "../../Services/ApiGithubService";
 
 const Repositories = ({ username }) => {
-  const [repositories, setRepositories] = useState("");
   const [loading, setLoading] = useState(true);
+  const [repositories, setRepositories] = useState(() => {
+    const localRepoData = localStorage.getItem("Repositories");
+    return localRepoData ? JSON.parse(localRepoData) : [];
+  });
 
   useEffect(() => {
     getRepos(username).then((repos) => {
       setRepositories(repos);
       setLoading(false);
     });
+    localStorage.setItem("Repositories", JSON.stringify(repositories));
   }, [username]);
 
   return (

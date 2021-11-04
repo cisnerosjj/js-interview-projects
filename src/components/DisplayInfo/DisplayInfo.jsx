@@ -4,7 +4,10 @@ import CardInfo from "./CardInfo";
 import { getUserData } from "../../Services/ApiGithubService";
 
 const DisplayInfo = ({ username, clicked, setClicked }) => {
-  const [userData, setUserData] = useState("");
+  const [userData, setUserData] = useState(() => {
+    const localData = localStorage.getItem("User Data");
+    return localData ? JSON.parse(localData) : [];
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -20,6 +23,8 @@ const DisplayInfo = ({ username, clicked, setClicked }) => {
           setError(error);
         });
     }
+    localStorage.setItem("User Data", JSON.stringify(userData));
+
     if (userData) {
       setLoading(false);
     }
