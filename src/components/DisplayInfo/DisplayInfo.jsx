@@ -13,20 +13,18 @@ const DisplayInfo = ({ username, clicked, setClicked }) => {
 
   useEffect(() => {
     if (clicked && username) {
+      setLoading(true);
       getUserData(username)
         .then((data) => {
           setUserData(data);
           setClicked(false);
-          setLoading(true);
+          setLoading(false);
+          localStorage.setItem("User Data", JSON.stringify(userData));
         })
         .catch((error) => {
           setError(error);
+          setLoading(false);
         });
-    }
-    localStorage.setItem("User Data", JSON.stringify(userData));
-
-    if (userData) {
-      setLoading(false);
     }
   }, [clicked, userData, username]);
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import logo from "../../assets/github-image.png";
 import storage from "../../utils/storage";
@@ -7,17 +7,21 @@ import PopUpLogin from "./PopUpLogin";
 
 const Nav = () => {
   const [showPopUp, setShowPopUp] = useState(false);
-  const [isLogin, setIsLogin] = useState("");
+
+  const [isLogin, setIsLogin] = useState(false);
   let history = useHistory();
   const location = useLocation();
-  const isActivate = localStorage.getItem("token", "");
 
-  useEffect(() => {
-    if (isActivate !== null) {
-      setIsLogin(true);
-    }
-  }, [isActivate]);
+  const onClickLogin = () => {
+    const isActivate = localStorage.getItem("token", "");
 
+    setIsLogin(true);
+  };
+
+  const signOut = () => {
+    storage.remove("token");
+    setIsLogin(false);
+  };
   const isHome = location.pathname.includes("profile");
 
   const handlePreviousPage = () => {
@@ -26,11 +30,6 @@ const Nav = () => {
 
   const handleNextPage = () => {
     history.goForward();
-  };
-
-  const signOut = () => {
-    storage.remove("token");
-    setIsLogin(false);
   };
 
   return (
@@ -84,7 +83,11 @@ const Nav = () => {
         </Link>
       </nav>
       {showPopUp && !isHome && (
-        <PopUpLogin setShowPopUp={setShowPopUp}></PopUpLogin>
+        <PopUpLogin
+          onClickLogin={onClickLogin}
+          setShowPopUp={setShowPopUp}
+          isLogin={isLogin}
+        ></PopUpLogin>
       )}
     </div>
   );

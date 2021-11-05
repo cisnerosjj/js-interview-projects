@@ -6,7 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../Home/PopUpLogin.css";
 
-const PopUpLogin = ({ setShowPopUp }) => {
+const PopUpLogin = ({ setShowPopUp, onClickLogin }) => {
   const [username, setUsername] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -22,17 +22,21 @@ const PopUpLogin = ({ setShowPopUp }) => {
 
   const onSubmitLogin = async (e) => {
     e.preventDefault();
-    login(username, password).catch((error) => {
-      toast(error?.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
+    login(username, password)
+      .then((token) => {
+        return token;
+      })
+      .catch((error) => {
+        toast(error?.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
-    });
     setShowPopUp(false);
     history.push("/");
   };
@@ -101,7 +105,11 @@ const PopUpLogin = ({ setShowPopUp }) => {
                   placeholder="Enter password"
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="submit" className="btn login">
+                <button
+                  type="submit"
+                  className="btn login"
+                  onClick={onClickLogin}
+                >
                   login
                 </button>
               </form>

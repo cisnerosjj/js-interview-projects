@@ -1,9 +1,12 @@
-// import { children } from "react";
+// import { children, useEffect, useState } from "react";
+// import React from "react";
 
 // export const mainContext = React.createContext({});
 
-// export function mainContextProvider({ children }) {
-//   const [data, setData] = useState(() => {
+// export function MainContextProvider({ children }) {
+//   const [isLoged, setIslogin] = useState(false);
+
+//   /* const [data, setData] = useState(() => {
 //     const localData = localStorage.getItem("data");
 //     return localData ? JSON.parse(localData) : [];
 //   });
@@ -11,15 +14,19 @@
 //     const localRepoData = localStorage.getItem("repos");
 //     return localRepoData ? JSON.parse(localRepoData) : [];
 //   });
-
+//  */
 //   useEffect(() => {
-//     localStorage.setItem("data", JSON.stringify(data));
-//     localStorage.setItem("repos", JSON.stringify(repositories));
-//   }, [data]);
-
+//     if (localStorage.getItem("token")) {
+//       setIslogin(true);
+//     }
+//     console.log(isLoged)
+//     // localStorage.setItem("data", JSON.stringify(data));
+//     // localStorage.setItem("repos", JSON.stringify(repositories));
+//   }, [setIslogin]);
 //   const value = {
-//     data,
-//     repositories,
+//     isLoged,
+//     /* data,
+//     repositories, */
 //   };
-//   return <mainContextProvider value={value}>{children}</mainContextProvider>;
+//   return <mainContext.Provider value={value}>{children}</mainContext.Provider>;
 // }

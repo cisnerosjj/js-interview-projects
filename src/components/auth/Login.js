@@ -11,6 +11,6 @@ export const login = async (user, pass) => {
     storage.set("token", accessToken);
     return accessToken;
   } catch (err) {
-    throw console.error(err.message);
+    throw console.error(err.message,"error en login.js");
   }
 };
